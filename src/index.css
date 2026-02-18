@@ -1,0 +1,15 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Apply body font everywhere */
+body {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Automatically apply premium heading font */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 0.5px;
+}
