@@ -1,17 +1,25 @@
-
 import { Outlet } from "react-router-dom";
 import BottomNavbar from "./BottomNavbar";
 
 export default function MainLayout() {
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 p-4">
-      <div className="w-[390px] h-[820px] bg-white/30 backdrop-blur-xl rounded-[40px] shadow-2xl relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br 
+    from-orange-200 via-pink-200 to-purple-200 flex justify-center">
 
-        <div className="h-full overflow-y-auto pb-24">
+      <div className="w-[390px] min-h-screen 
+      bg-white/30 backdrop-blur-xl 
+      rounded-[40px] shadow-2xl 
+      relative overflow-hidden">
+
+        {/* Page Content */}
+        <div className="pb-24">
           <Outlet />
         </div>
 
-        <BottomNavbar />
+        {/* Bottom Navbar Fixed */}
+        <div className="absolute bottom-0 left-0 w-full">
+          <BottomNavbar />
+        </div>
 
       </div>
     </div>

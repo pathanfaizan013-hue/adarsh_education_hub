@@ -1,86 +1,114 @@
-import React from "react";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft } from "lucide-react";
 
 export default function Head() {
+  const navigate = useNavigate();
+
   return (
-    <div className="min-h-screen pb-24 bg-gradient-to-b from-pink-200 via-purple-200 to-blue-200">
+    <div className="min-h-screen flex justify-center bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 py-6">
 
-      {/* Header */}
-      <div className="pt-10 px-6">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">
-          Head of Institute
-        </h1>
+      <div className="w-[380px] bg-white/30 backdrop-blur-xl rounded-[40px] shadow-xl border border-white/50 overflow-hidden">
 
-        {/* Profile Card */}
-        <div className="bg-white/40 backdrop-blur-lg rounded-3xl p-4 shadow-xl border border-white/40">
-          <img
-            src="https://images.unsplash.com/photo-1560250097-0b93528c311a"
-            alt="Principal"
-            className="w-full h-60 object-cover rounded-2xl"
-          />
+        {/* Header */}
+        <div className="p-6 bg-gradient-to-br from-pink-100 via-purple-100 to-yellow-100">
 
-          <div className="text-center mt-4">
-            <h2 className="text-2xl font-bold text-gray-800">
-              Rajesh Sharma
+          <div className="flex items-center gap-3">
+            <ArrowLeft
+              size={24}
+              className="cursor-pointer text-gray-700"
+              onClick={() => navigate(-1)}
+            />
+            <h1 className="text-2xl font-semibold text-gray-700">
+              Adarsh Education Hub
+            </h1>
+          </div>
+
+          <p className="text-base text-orange-500 mt-1 ml-9">
+            Head of Institute
+          </p>
+        </div>
+
+        {/* Top Notice */}
+        <div className="px-6 pt-6">
+          <div className="text-center text-sm font-medium text-blue-700 bg-blue-100 py-3 rounded-xl shadow">
+            Student's Corner | Placements & MoU Cell | Competitive Exams & Career Guidance Cell
+          </div>
+        </div>
+
+        {/* Cards Section */}
+        <div className="px-6 py-6 space-y-6">
+
+          {/* President */}
+          <div className="bg-gradient-to-r from-yellow-200 to-pink-200 p-4 rounded-2xl shadow-md border border-white/60 backdrop-blur-lg">
+            <h2 className="text-lg font-semibold text-gray-800 mb-2">
+              President
             </h2>
-            <p className="text-yellow-600 font-semibold text-lg">
+            <div className="flex gap-3">
+              <img
+                src="https://via.placeholder.com/80"
+                alt="President"
+                className="rounded-lg"
+              />
+              <p className="text-sm text-gray-700">
+                Founder of Adarsh Education Society. Dedicated to providing quality education and leadership.
+              </p>
+            </div>
+          </div>
+
+          {/* Secretary */}
+          <div className="bg-gradient-to-r from-yellow-200 to-purple-200 p-4 rounded-2xl shadow-md border border-white/60 backdrop-blur-lg">
+            <h2 className="text-lg font-semibold text-gray-800 mb-2">
+              Secretary
+            </h2>
+            <div className="flex gap-3">
+              <img
+                src="https://via.placeholder.com/80"
+                alt="Secretary"
+                className="rounded-lg"
+              />
+              <p className="text-sm text-gray-700">
+                Warm greetings to all students. It is our pleasure to welcome you to Adarsh College.
+              </p>
+            </div>
+          </div>
+
+          {/* Principal */}
+          <div className="bg-gradient-to-r from-blue-200 to-pink-200 p-4 rounded-2xl shadow-md border border-white/60 backdrop-blur-lg">
+            <h2 className="text-lg font-semibold text-gray-800 mb-2">
               Principal
-            </p>
+            </h2>
+            <div className="flex gap-3">
+              <img
+                src="https://via.placeholder.com/80"
+                alt="Principal"
+                className="rounded-lg"
+              />
+              <p className="text-sm text-gray-700">
+                Greetings to all students! Warm welcome to the family of Adarsh Education Society.
+              </p>
+            </div>
           </div>
+
         </div>
-      </div>
 
-      {/* Qualification */}
-      <div className="px-6 mt-6">
-        <div className="bg-white/40 backdrop-blur-md rounded-2xl p-4 shadow-md border border-white/40">
-          <h3 className="text-xl font-bold text-orange-600 mb-2">
-            Qualification
-          </h3>
-          <p className="text-gray-700">
-            Ph.D. in Education, M.Ed.
-          </p>
-        </div>
-      </div>
+        {/* Bottom Buttons */}
+        <div className="px-6 pb-6 space-y-4">
 
-      {/* Experience */}
-      <div className="px-6 mt-4">
-        <div className="bg-white/40 backdrop-blur-md rounded-2xl p-4 shadow-md border border-white/40">
-          <h3 className="text-xl font-bold text-orange-600 mb-2">
-            Experience
-          </h3>
-          <p className="text-gray-700">
-            20+ Years in the field of education
-          </p>
-        </div>
-      </div>
-
-      {/* Message */}
-      <div className="px-6 mt-4">
-        <div className="bg-white/40 backdrop-blur-md rounded-2xl p-4 shadow-md border border-white/40">
-          <h3 className="text-xl font-bold text-orange-600 mb-2">
-            Message
-          </h3>
-          <p className="text-gray-700">
-            Welcome to our institution! We are dedicated to providing quality
-            education and fostering academic excellence. Feel free to reach out
-            for any assistance.
-          </p>
-        </div>
-      </div>
-
-      {/* Contact */}
-      <div className="px-6 mt-4">
-        <div className="bg-white/40 backdrop-blur-md rounded-2xl p-4 shadow-md border border-white/40">
-          <h3 className="text-xl font-bold text-gray-800 mb-3">
-            Contact
-          </h3>
-
-          <div className="flex justify-between items-center text-gray-700">
-            <span>📞 123-456-7890</span>
-            <span>✉ principal@example.com</span>
+          <div className="bg-white/60 py-3 text-center rounded-xl shadow cursor-pointer hover:scale-[1.02] transition">
+            Best Practices
           </div>
-        </div>
-      </div>
 
+          <div className="bg-white/60 py-3 text-center rounded-xl shadow cursor-pointer hover:scale-[1.02] transition">
+            Azadi ka Amrit Mahotsav
+          </div>
+
+          <div className="bg-white/60 py-3 text-center rounded-xl shadow cursor-pointer hover:scale-[1.02] transition">
+            Alumni
+          </div>
+
+        </div>
+
+      </div>
     </div>
   );
 }

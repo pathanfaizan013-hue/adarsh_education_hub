@@ -1,29 +1,29 @@
 import { useNavigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 
-export default function DepartmentTeachers() {
+export default function Staff() {
   const navigate = useNavigate();
 
-  const teachers = [
+  const staffMembers = [
     {
-      name: "Prof. Amit Sharma",
-      subject: "Computer Science",
-      qualification: "M.Sc, NET",
+      name: "Mr. Ramesh Patil",
+      role: "Office Superintendent",
     },
     {
-      name: "Prof. Neha Patil",
-      subject: "Cyber Security",
-      qualification: "MCA, SET",
+      name: "Mrs. Sunita Deshmukh",
+      role: "Clerk",
     },
     {
-      name: "Prof. Rahul Deshmukh",
-      subject: "Software Engineering",
-      qualification: "M.Tech",
+      name: "Mr. Ajay Kulkarni",
+      role: "Lab Assistant",
     },
     {
-      name: "Prof. Sneha Kulkarni",
-      subject: "Digital Image Processing",
-      qualification: "M.Sc",
+      name: "Mr. Prakash Shinde",
+      role: "Librarian",
+    },
+    {
+      name: "Mr. Mahesh Pawar",
+      role: "Peon",
     },
   ];
 
@@ -47,34 +47,31 @@ export default function DepartmentTeachers() {
           </div>
 
           <p className="text-base text-orange-500 mt-1 ml-9">
-            Teachers Information
+            Staff of College
           </p>
         </div>
 
-        {/* Teachers List */}
+        {/* Staff List */}
         <div className="px-6 py-6 space-y-5">
 
-          {teachers.map((teacher, index) => (
+          {staffMembers.map((staff, index) => (
             <div
               key={index}
               className="bg-gradient-to-r from-yellow-100 to-purple-100 p-4 rounded-2xl shadow-md border border-white/60 backdrop-blur-lg transition hover:scale-[1.02]"
             >
-              <div className="flex gap-4 items-center">
+              <div className="flex items-center gap-4">
                 <img
                   src="https://via.placeholder.com/70"
-                  alt="Teacher"
+                  alt="Staff"
                   className="rounded-xl"
                 />
 
                 <div>
                   <h2 className="text-lg font-semibold text-gray-800">
-                    {teacher.name}
+                    {staff.name}
                   </h2>
                   <p className="text-sm text-gray-600">
-                    {teacher.subject}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    {teacher.qualification}
+                    {staff.role}
                   </p>
                 </div>
               </div>

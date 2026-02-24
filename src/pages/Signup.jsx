@@ -1,36 +1,38 @@
-import { useState, useEffect } from "react";
+
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Signup() {
   const navigate = useNavigate();
 
-  const [emailOrUsername, setEmailOrUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+  });
+
   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    const user = localStorage.getItem("currentUser");
-    if (user) {
-      navigate("/home");
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSignup = () => {
+    if (!form.username || !form.email || !form.password) {
+      alert("Fill all fields");
+      return;
     }
-  }, []);
 
-  const handleLogin = () => {
-    const users = JSON.parse(localStorage.getItem("users")) || [];
+    let users = JSON.parse(localStorage.getItem("users")) || [];
 
-    const user = users.find(
-      (u) =>
-        (u.email === emailOrUsername ||
-          u.username === emailOrUsername) &&
-        u.password === password
-    );
+    users.push(form);
+    localStorage.setItem("users", JSON.stringify(users));
 
-    if (user) {
-      localStorage.setItem("currentUser", JSON.stringify(user));
-      navigate("/home");
-    } else {
-      alert("Invalid Email/Username or Password");
-    }
+    alert("Account Created Successfully!");
+    navigate("/login");
   };
 
   return (
@@ -41,7 +43,7 @@ export default function Login() {
       rounded-[35px] shadow-2xl p-8">
 
         <h2 className="text-center text-orange-500 text-3xl font-semibold">
-          Welcome
+          Create Account
         </h2>
 
         <h3 className="text-center text-xl font-semibold text-gray-700 mb-6">
@@ -52,18 +54,26 @@ export default function Login() {
 
           <input
             type="text"
-            placeholder="Email or Username"
-            value={emailOrUsername}
-            onChange={(e) => setEmailOrUsername(e.target.value)}
+            name="username"
+            placeholder="Username"
+            onChange={handleChange}
+            className="w-full p-3 rounded-xl bg-white/80 outline-none shadow-inner"
+          />
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            onChange={handleChange}
             className="w-full p-3 rounded-xl bg-white/80 outline-none shadow-inner"
           />
 
           <div className="relative">
             <input
               type={show ? "text" : "password"}
+              name="password"
               placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handleChange}
               className="w-full p-3 rounded-xl bg-white/80 outline-none shadow-inner"
             />
             <span
@@ -75,20 +85,20 @@ export default function Login() {
           </div>
 
           <button
-            onClick={handleLogin}
+            onClick={handleSignup}
             className="w-full py-3 rounded-xl text-white font-semibold
             bg-gradient-to-r from-orange-400 to-pink-500 shadow-lg"
           >
-            Login
+            Sign Up
           </button>
 
           <p className="text-center text-sm mt-3">
-            Don’t have an account?{" "}
+            Already have account?{" "}
             <span
               className="text-blue-600 cursor-pointer"
-              onClick={() => navigate("/signup")}
+              onClick={() => navigate("/login")}
             >
-              Sign Up
+              Login
             </span>
           </p>
 

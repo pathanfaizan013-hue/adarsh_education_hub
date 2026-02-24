@@ -1,77 +1,133 @@
 
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import {
-  Search,
   User,
   Users,
   BookOpen,
   FileText,
   Clock,
   GraduationCap,
+  LayoutGrid,
   Info
 } from "lucide-react";
 
 export default function Home() {
   const navigate = useNavigate();
+  const [search, setSearch] = useState("");
 
-  const menuItems = [
-    { title: "Head of Institute", icon: User, gradient: "from-yellow-200 to-pink-200", path: "/head" },
-    { title: "Teachers Information", icon: Users, gradient: "from-yellow-200 to-pink-200", path: "/teachers" },
-    { title: "Courses", icon: BookOpen, gradient: "from-blue-200 to-purple-200", path: "/course" },
-    { title: "Forms", icon: FileText, gradient: "from-blue-200 to-purple-200", path: "/forms" },
-    { title: "Time Table", icon: Clock, gradient: "from-yellow-200 to-pink-200", path: "/timetable" },
-    { title: "Staff of College", icon: GraduationCap, gradient: "from-yellow-200 to-purple-200", path: "/staff" },
-    { title: "Other's", icon: Users, gradient: "from-blue-200 to-purple-200", path: "/others" },
-    { title: "About App", icon: Info, gradient: "from-blue-200 to-purple-200", path: "/about" },
-  ];
+  const Option = ({ icon: Icon, title, gradient, path }) => {
+    // Search filter
+    if (
+      search &&
+      !title.toLowerCase().includes(search.toLowerCase())
+    ) {
+      return null;
+    }
+
+    return (
+      <div
+        onClick={() => path && navigate(path)}
+        className={`flex items-center gap-4 px-4 py-3 rounded-2xl border border-white/60 shadow-sm backdrop-blur-md cursor-pointer transition hover:scale-[1.02] ${gradient}`}
+      >
+        <div className="bg-white p-2 rounded-xl shadow">
+          <Icon size={20} />
+        </div>
+        <span className="text-[15px] font-medium text-gray-700">
+          {title}
+        </span>
+      </div>
+    );
+  };
 
   return (
-    <div>
+    <div className="min-h-screen flex justify-center items-start bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 py-6">
 
-      {/* Header */}
-      <div className="mb-4">
-        <h1 className="text-3xl font-poppins text-gray-800">
-             Adarsh Education Hub
-        </h1>
-      </div>
+      <div className="w-[380px] bg-white/30 backdrop-blur-xl rounded-[40px] shadow-xl border border-white/50 overflow-hidden">
 
-      {/* Search */}
-      <div className="relative mb-6">
-        <Search
-          size={18}
-          className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500"
-        />
-        <input
-          placeholder="Search..."
-          className="w-full pl-11 pr-4 py-3 rounded-full bg-white shadow-md outline-none"
-        />
-      </div>
+        {/* Header */}
+        <div className="p-6 pb-4 bg-gradient-to-br from-purple-100 via-purple-100 to-yellow-100">
+          <h1 className="text-2xl font-semibold text-gray-700 text-center">
+            Adarsh Education Hub
+          </h1>
 
-      {/* Cards */}
-      <div className="space-y-4">
-        {menuItems.map((item, index) => {
-          const Icon = item.icon;
-
-          return (
-            <div
-              key={index}
-              onClick={() => navigate(item.path)}
-              className={`bg-gradient-to-r ${item.gradient} p-4 rounded-2xl shadow-md cursor-pointer active:scale-95 transition`}
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-10 h-10 bg-white rounded-lg flex items-center justify-center shadow-sm">
-                  <Icon size={18} className="text-gray-700" />
-                </div>
-
-                <h2 className="text-lg font-semibold text-gray-800">
-                  {item.title}
-                </h2>
-              </div>
+          {/* Search */}
+          <div className="mt-4">
+            <div className="flex items-center bg-white/70 rounded-full px-4 py-3 shadow-inner">
+              <span className="mr-2 text-gray-500">🔍</span>
+              <input
+                type="text"
+                placeholder="Search..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="bg-transparent outline-none w-full text-gray-700"
+              />
             </div>
-          );
-        })}
-      </div>
+          </div>
+        </div>
 
+        {/* Options */}
+        <div className="px-6 py-4 space-y-4">
+
+          <Option
+            icon={User}
+            title="Head of Institute"
+            gradient="bg-gradient-to-r from-yellow-200 to-pink-200"
+            path="/head"
+          />
+
+          <Option
+            icon={Users}
+            title="Teachers Information"
+            gradient="bg-gradient-to-r from-yellow-200 to-pink-200"
+            path="/teachers"
+          />
+
+          <Option
+            icon={BookOpen}
+            title="Courses"
+            gradient="bg-gradient-to-r from-blue-200 to-purple-200"
+            path="/course"
+          />
+
+          <Option
+            icon={FileText}
+            title="Forms"
+            gradient="bg-gradient-to-r from-blue-200 to-purple-200"
+            path="/forms"
+          />
+
+          <Option
+            icon={Clock}
+            title="Time Table"
+            gradient="bg-gradient-to-r from-yellow-200 to-pink-200"
+            path="/timetable"
+          />
+
+          <Option
+            icon={GraduationCap}
+            title="Staff of College"
+            gradient="bg-gradient-to-r from-yellow-200 to-pink-200"
+            path="/staff"
+          />
+
+          <Option
+            icon={LayoutGrid}
+            title="Other’s"
+            gradient="bg-gradient-to-r from-blue-200 to-purple-200"
+            path="/others"
+          />
+
+          <Option
+            icon={Info}
+            title="About App"
+            gradient="bg-gradient-to-r from-blue-200 to-purple-200"
+            path="/about"
+          />
+
+        </div>
+
+      </div>
     </div>
   );
 }

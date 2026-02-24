@@ -1,7 +1,9 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import MainLayout from "./components/MainLayout";
 
+// Pages
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import Home from "./pages/Home";
 import Course from "./pages/Course";
 import Downloads from "./pages/Downloads";
@@ -13,42 +15,80 @@ import BCA from "./pages/BCA";
 import SemesterSubjects from "./pages/SemesterSubjects";
 import SubjectDetails from "./pages/SubjectDetails";
 import Syllabus from "./pages/Syllabus";
-import Teachers from "./pages/Teachers";
+import Staff from "./pages/Staff";
+import About from "./pages/About";
+import Others from "./pages/Others";
+import Forms from "./pages/Forms";
+import TimeTable from "./pages/TimeTable";
 
 function App() {
+  const isLoggedIn = localStorage.getItem("currentUser");
+
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
 
-        {/* Default open -> Login */}
-        <Route path="/" element={<Navigate to="/login" />} />
+        {/* Smart Default Route */}
+        <Route
+          path="/"
+          element={
+            isLoggedIn
+              ? <Navigate to="/home" />
+              : <Navigate to="/login" />
+          }
+        />
 
-        {/* Login Page (No Navbar) */}
+        {/* Auth Routes */}
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
 
-        {/* All pages with Bottom Navbar */}
+        {/* Protected Routes */}
         <Route element={<MainLayout />}>
 
-          <Route path="/home" element={<Home />} />
-          <Route path="/course" element={<Course />} />
-          <Route path="/downloads" element={<Downloads />} />
-          <Route path="/menu" element={<MenuPage />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/home"
+            element={isLoggedIn ? <Home /> : <Navigate to="/login" />}
+          />
+
+          <Route
+            path="/course"
+            element={isLoggedIn ? <Course /> : <Navigate to="/login" />}
+          />
+
+          <Route
+            path="/downloads"
+            element={isLoggedIn ? <Downloads /> : <Navigate to="/login" />}
+          />
+
+          <Route
+            path="/menu"
+            element={isLoggedIn ? <MenuPage /> : <Navigate to="/login" />}
+          />
+
+          <Route
+            path="/profile"
+            element={isLoggedIn ? <Profile /> : <Navigate to="/login" />}
+          />
 
           <Route path="/head" element={<Head />} />
           <Route path="/teachers" element={<DepartmentTeachers />} />
           <Route path="/bca" element={<BCA />} />
-
           <Route path="/semester/:id" element={<SemesterSubjects />} />
           <Route path="/subject/:id" element={<SubjectDetails />} />
           <Route path="/syllabus" element={<Syllabus />} />
+          <Route path="/staff" element={<Staff />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/others" element={<Others />} />
+          <Route path="/forms" element={<Forms />} />
+          <Route path="/timetable" element={<TimeTable />} />
+
         </Route>
 
-        {/* Unknown route fallback */}
-        <Route path="*" element={<Navigate to="/login" />} />
+        {/* Fallback */}
+        <Route path="*" element={<Navigate to="/" />} />
 
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 

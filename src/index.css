@@ -1,14 +1,20 @@
+/* Google Fonts - MUST BE FIRST */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Apply body font everywhere */
+
+/* Global Body Style */
 body {
   font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-/* Automatically apply premium heading font */
+
+/* Premium Headings */
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display', serif;
   letter-spacing: 0.5px;

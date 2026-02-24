@@ -1,10 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { useState } from "react";
+import { ArrowLeft, ChevronRight } from "lucide-react";
 
 export default function SubjectDetails() {
   const navigate = useNavigate();
-  const { name } = useParams();
-
+  const { id } = useParams();
   const [search, setSearch] = useState("");
 
   const options = [
@@ -15,67 +15,69 @@ export default function SubjectDetails() {
     "Practical",
   ];
 
-  const filteredOptions = options.filter((item) =>
-    item.toLowerCase().includes(search.toLowerCase())
-  );
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-pink-100 via-purple-100 to-blue-100 pb-24">
+    <div className="min-h-screen flex justify-center bg-gradient-to-br from-pink-200 via-purple-200 to-blue-200 py-6">
 
-      <div className="p-5">
-        <button
-          onClick={() => navigate(-1)}
-          className="text-orange-500 text-lg mb-2"
-        >
-          ←
-        </button>
+      <div className="w-[380px] bg-white/30 backdrop-blur-xl rounded-[40px] shadow-xl border border-white/50 overflow-hidden">
 
-        <h1 className="text-2xl font-bold text-gray-800">
-          Adarsh Education Hub
-        </h1>
+        {/* Header */}
+        <div className="p-6 bg-gradient-to-br from-pink-100 via-purple-100 to-yellow-100">
 
-        <h2 className="text-2xl font-bold text-orange-500 mt-1">
-          {name}
-        </h2>
-
-        <p className="text-gray-600 text-sm mt-1">
-          BCA Department / Semester 6 / {name}
-        </p>
-
-        {/* 🔥 Working Search */}
-        <div className="mt-4">
-          <input
-            type="text"
-            placeholder="Search..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            className="w-full px-5 py-3 rounded-full shadow-md bg-white/70 backdrop-blur-md outline-none"
-          />
-        </div>
-      </div>
-
-      <div className="px-5 mt-4">
-        {filteredOptions.map((item, index) => (
-          <div
-            key={index}
-            className="bg-gradient-to-r from-green-100 via-blue-200 to-purple-200 
-                       p-4 rounded-xl shadow-md mb-4 flex justify-between items-center
-                       cursor-pointer hover:scale-105 transition"
-          >
-            <span className="text-lg font-semibold text-gray-800">
-              {item}
-            </span>
-            <span className="text-gray-500 text-xl">›</span>
+          {/* Back + Title */}
+          <div className="flex items-center gap-3">
+            <ArrowLeft
+              size={24}
+              className="cursor-pointer text-gray-700"
+              onClick={() => navigate(-1)}
+            />
+            <h1 className="text-2xl font-semibold text-gray-700">
+              Adarsh Education Hub
+            </h1>
           </div>
-        ))}
 
-        {filteredOptions.length === 0 && (
-          <p className="text-center text-gray-500 mt-4">
-            No results found
+          {/* Breadcrumb */}
+          <p className="text-base text-orange-500 mt-1 ml-9">
+            BCA Department / Semester 6 /
           </p>
-        )}
-      </div>
 
+          {/* Search */}
+          <div className="mt-5">
+            <div className="flex items-center bg-white/70 rounded-full px-4 py-3 shadow-inner">
+              <span className="mr-2 text-gray-500">🔍</span>
+              <input
+                type="text"
+                placeholder="Search..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="bg-transparent outline-none w-full text-gray-700"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Options */}
+        <div className="px-6 py-6 space-y-5">
+
+          {options
+            .filter((opt) =>
+              opt.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((opt, index) => (
+              <div
+                key={index}
+                onClick={() => navigate(`/${opt.toLowerCase().replace(" ", "-")}`)}
+                className="flex items-center justify-between px-5 py-4 rounded-2xl bg-gradient-to-r from-green-100 to-purple-100 shadow-md border border-white/60 backdrop-blur-lg cursor-pointer transition hover:scale-[1.02]"
+              >
+                <span className="text-lg font-medium text-gray-700">
+                  {opt}
+                </span>
+                <ChevronRight size={20} className="text-gray-500" />
+              </div>
+            ))}
+
+        </div>
+
+      </div>
     </div>
   );
 }
